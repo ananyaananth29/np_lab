@@ -3,6 +3,9 @@
 #include"ns3/network-module.h"
 #include"ns3/internet-module.h"
 #include"ns3/application-module.h"
+
+using namespace ns3;
+
 int main(int argc,char *argv[]){
   NodeContainer nodes;
   nodes.Create(4);
