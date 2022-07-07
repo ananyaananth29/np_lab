@@ -7,8 +7,7 @@
 
 using namespace ns3;
 
-int 
-main (int argc, char *argv[])
+int main (int argc, char *argv[])
 {
   NodeContainer nodes;
   nodes.Create (4);
@@ -18,7 +17,8 @@ main (int argc, char *argv[])
   csma.SetChannelAttribute ("Delay", StringValue ("2ms"));
   csma.SetDeviceAttribute ("Mtu", UintegerValue (1400));
   
-  NetDeviceContainer devices = csma.Install (nodes);
+  NetDeviceContainer devices 
+  devices = csma.Install (nodes);
   
   InternetStackHelper stack;
   stack.Install (nodes);
@@ -26,7 +26,8 @@ main (int argc, char *argv[])
   Ipv4AddressHelper address;
   address.SetBase ("10.1.1.0", "255.255.255.0");
   
-  Ipv4InterfaceContainer interfaces = address.Assign (devices);
+  Ipv4InterfaceContainer interfaces 
+  interfaces = address.Assign (devices);
    
   UdpEchoServerHelper echoServer (9);
   
