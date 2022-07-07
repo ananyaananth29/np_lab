@@ -46,7 +46,7 @@ int main (int argc, char *argv[])
   clientApps.Stop (Seconds (10.0));
 
 
-  AnimationInterface anim ("second2.xml");
+  AnimationInterface anim ("second.xml");
   Simulator::Run ();
   Simulator::Destroy ();
   return 0;
