@@ -14,17 +14,17 @@ int main(int argc,char *argv[]){
   csma.SetDeviceAttribute("DataRate", StringValue ("5Mbps"));
   csma.SetChannelAttribute("Delay", StringValue ("2ms"));
   
-  NetDeviceCollection devices;
-  devices=csma.Install(nodes);
+  NetDeviceContainer devices;
+  devices=csma.Install (nodes);
   
   InternetStackHelper stack;
   stack.Install(nodes);
   
   Ipv4AddreddHelper address;
-  address.SetBase("10.1.1.0","255.255.255.0");
+  address.SetBase ("10.1.1.0","255.255.255.0");
   
   Ipv4InterfaceContainer interfaces;
-  interfaces=address.Assign(devices);
+  interfaces=address.Assign (devices);
   
   UdpEchoServerHelper echoServer (9);
   
@@ -37,7 +37,7 @@ int main(int argc,char *argv[]){
   echoClient.SetAttribute("Interval",TimeValue( Seconds (1.0)));
   echoClient.SetSttribute("PacketSize",UintegerValue (1024));
   
-  ApplicationContainer clientApps= echoClient.Install(nodes.Get(0));
+  ApplicationContainer clientApps= echoClient.Install (nodes.Get (0));
   clientApps.Start ( Seconds (2.0));
   clientApps.Stop ( Seconds (10.0));
   
