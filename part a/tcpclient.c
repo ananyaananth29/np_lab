@@ -37,12 +37,7 @@ int main()
 		while((bytes_recv=recv(sock,recv_data,1024,0))>0)
 		{
 			recv_data[bytes_recv]='\0';
-			//printf("%s\n\n", recv_data);
-			//if(strcmp(recv_data,"q")==0)
-		//	{
-		//	close(sock);
-		//	break;
-		//	}
+		}
 			printf("%s\n", recv_data);
 		}
 	close(sock);	
