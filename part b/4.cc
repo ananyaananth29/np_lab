@@ -1,17 +1,17 @@
-#include"netanim-module.h"
-#include"core-module.h"
-#include"network-module.h"
-#include"internet-module.h"
-#include"point-to-point-module.h"
-#include"applications-module.h"
-#include"wifi-module.h"
-#include"mobitlity-module.h"
+#include "ns3/netanim-module.h"
+#include "ns3/core-module.h"
+#include "ns3/network-module.h"
+#include "ns3/internet-module.h"
+#include "ns3/point-to-point-module.h"
+#include "ns3/applications-module.h"
+#include "ns3/wifi-module.h"
+#include "ns3/mobility-module.h"
 
 using namespace ns3;
 
 int main(int argc,char *argv[]){
   NodeContainer ptpnodes;
-  ptpnodes.Ctreate (2);
+  ptpnodes.Create (2);
   
   NodeContainer csmanodes;
   csmanodes.Add (ptpnodes.Get (1));
@@ -27,7 +27,7 @@ int main(int argc,char *argv[]){
   csma.SetDeviceAttribute ("Mtu",UintegerValue (1400));
   
   NetDeviceContainer ptpdevices;
-  ptpdevices=ptp.Intall (ptpnodes);
+  ptpdevices=ptp.Install (ptpnodes);
   
   NetDeviceContainer csmadevices;
   csmadevices=csma.Install (csmanodes));
@@ -52,16 +52,16 @@ int main(int argc,char *argv[]){
   
   ApplicationContainer serverApps =echoServer.Install (csmanodes.Get (1), 9);
   serverApps.Start ( Seconds (1.0));
-  serverApps.stop ( Seconds (10.0));
+  serverApps.Stop ( Seconds (10.0));
   
-  UdpEchoClient echoClient (csmainterfaces.GetAddress (0));
+  UdpEchoClientHelper echoClient (csmainterfaces.GetAddress (0));
   echoClient.SetAttribute ("MaxPackets",UintegerValue (1));
   echoClient.SetAttribute ("Interval",TimeValue ( Seconds (1.0)));
   echoClient.SetAttribute ("PacketSize",UintegerValue (1024));
   
   ApplicationContainer clientApps =echoServer.Install (ptpnodes.Get (1), 9);
   clientApps.Start ( Seconds (2.0));
-  clientApps.stop ( Seconds (10.0));
+  clientApps.Stop ( Seconds (10.0));
   
   Ipv4GlobalRoutingHelper::PopulateRoutingTables ();
   ptp.EnablePcapAll ("second");
