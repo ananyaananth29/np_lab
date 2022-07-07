@@ -63,16 +63,12 @@ int main()
 
 		while(ch != EOF)//this loop searches the for the current word
 		{
-		   // fscanf(fptr,"%s",send_data);
 			send_data[flag] = ch;
 			flag++;
 			ch = fgetc(fptr);
-		   //send(connected,send_data,strlen(send_data),0);
 		}
 			send(connected,send_data,strlen(send_data),0);
-			//send_data[0] = 'q';
-			//strcpy(send_data,"q");
-			//send(connected,send_data,strlen(send_data),0);
+			
 			close(connected);
 			break;
 	}
