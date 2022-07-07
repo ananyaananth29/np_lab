@@ -10,27 +10,18 @@
 #include "ns3/netanim-module.h"
 
 
-// Default Network Topology
-//
-//       10.1.1.0
-// n0 -------------- n1   n2   n3   n4
-//    point-to-point  |    |    |    |
-//                    ================
-//                      LAN 10.1.2.0
-
-
 using namespace ns3;
 int 
 main (int argc, char *argv[])
 {
  
-  uint32_t nCsma = 3;
-NodeContainer p2pNodes;
+ 
+  NodeContainer p2pNodes;
   p2pNodes.Create (2);
 
   NodeContainer csmaNodes;
   csmaNodes.Add (p2pNodes.Get (1));
-  csmaNodes.Create (nCsma);
+  csmaNodes.Create (3);
 
   PointToPointHelper pointToPoint;
   pointToPoint.SetDeviceAttribute ("DataRate", StringValue ("5Mbps"));
@@ -61,11 +52,11 @@ NodeContainer p2pNodes;
 
   UdpEchoServerHelper echoServer (9);
 
-  ApplicationContainer serverApps = echoServer.Install (csmaNodes.Get (nCsma));
+  ApplicationContainer serverApps = echoServer.Install (csmaNodes.Get (3));
   serverApps.Start (Seconds (1.0));
   serverApps.Stop (Seconds (10.0));
 
-  UdpEchoClientHelper echoClient (csmaInterfaces.GetAddress (nCsma), 9);
+  UdpEchoClientHelper echoClient (csmaInterfaces.GetAddress (3), 9);
   echoClient.SetAttribute ("MaxPackets", UintegerValue (1));
   echoClient.SetAttribute ("Interval", TimeValue (Seconds (1.0)));
   echoClient.SetAttribute ("PacketSize", UintegerValue (1024));
@@ -78,8 +69,9 @@ NodeContainer p2pNodes;
 
   pointToPoint.EnablePcapAll ("second");
   csma.EnablePcap ("second", csmaDevices.Get (1), true);
-AnimationInterface anim ("third.xml");
-Simulator::Run ();
+  
+  AnimationInterface anim ("third.xml");
+  Simulator::Run ();
   Simulator::Destroy ();
   return 0;
 }
