@@ -1,0 +1,1 @@
+import 'package:flutter/material.dart'; void main() { runApp(MaterialApp( home: Text( 'Without SafeArea', // Text to display textAlign: TextAlign.center, //align the text to center style: TextStyle( fontSize: 40, // fontSize in px fontWeight: FontWeight.w800, // font weight color: Colors.deepOrangeAccent, // Setting up the color font ), ), )); }
