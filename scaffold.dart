@@ -1,0 +1,1 @@
+import 'package:flutter/material.dart'; void main() { runApp( MaterialApp( home:Scaffold( appBar: AppBar( title: Text("First Flutter App"), ), body: Center( child: Text( 'This is a first App', style: TextStyle( fontSize: 40.0, fontStyle: FontStyle.italic, fontWeight: FontWeight.bold,), ), ), ), ), ); }
